@@ -40,16 +40,16 @@ def main(params):
     # Avoid that m_h2r and m_t2r of train and valid are different
     valid.m_h2r = train.m_h2r
     valid.m_t2r = train.m_t2r
-    
+
     params.num_rels = train.num_rels
     params.aug_num_rels = train.aug_num_rels
 
     # Set the embedding dimension of relation and node
-    if params.init_nei_rels == 'no': 
-        params.inp_dim = train.n_feat_dim        
+    if params.init_nei_rels == 'no':
+        params.inp_dim = train.n_feat_dim
     else:
         params.inp_dim = train.n_feat_dim + params.sem_dim
-        
+
 
     # Log the max label value to save it in the model. This will be used to cap the labels generated on test set.
     params.max_label_value = train.max_n_label
@@ -166,7 +166,7 @@ if __name__ == '__main__':
     parser.add_argument('--is_comp', type=str, default='mult', choices=['mult', 'sub'], help='The composition manner of node and relation')
     parser.add_argument('--comp_ht', type=str, choices=['mult, mlp, sum'], default='sum', help='The composition operator of head and tail embedding')
     parser.add_argument('--comp_hrt', type=str, choices=['TransE, DistMult'], default=None, help='The composition operator of (h, r, t)embedding')
-    parser.add_argument('--MI_coef', type=float, default=None, help='Coefficient of MI loss')
+    parser.add_argument('--coef_nce_loss', type=float, default=None, help='Coefficient of MI loss')
     parser.add_argument('--init_nei_rels', type=str, choices=['no', 'out', 'in', 'both'], default='in', help='the manner of utilizing relatioins when initializing entity embedding')
     parser.add_argument('--sort_data', type=bool, default=True,
                         help='whether to training data according to relation id ')
